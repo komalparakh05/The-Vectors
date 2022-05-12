@@ -5,22 +5,21 @@ from joblib import dump, load
 
 
 def preprocess(data: pd.DataFrame, data_context: str) -> pd.DataFrame:
-    # encoding and arranging data
-    data = data[['Loan_ID', 'Gender', 'Married', 'Dependents',
-                 'Education','Self_Employed', 'Property_Area', 'Loan_Status']]
+    # encoding and arranging dtartata
+    data = data[['Gender','Education',
+                 'Married','Self_Employed','Property_Area']]
     if data_context == 'train':
         Onehot_encoder = OneHotEncoder(sparse=False, handle_unknown='ignore')
-        Onehot_encoder = Onehot_encoder.fit(data[['Loan_Status',
-                                                  'Gender',
+        Onehot_encoder = Onehot_encoder.fit(data[['Gender',
                                                   'Education',
+                                                  'Married'
                                                   'Self_Employed',
-                                                  'Property_Area',
-                                                  'Married']])
+                                                  'Property_Area',]])
         dump(Onehot_encoder, r"../Models/onehot_encoder.joblib")
 
     Onehot_encoder = load(r"../Models/onehot_encoder.joblib")
     encoded_data = pd.DataFrame(Onehot_encoder.transform
-                                (data[['Loan_Status','Gender',
+                                (data[['Gender',
                                        'Education','Self_Employed',
                                        'Property_Area','Married']]),
 

@@ -5,8 +5,8 @@ from sklearn import linear_model
 from sklearn.metrics import mean_squared_log_error
 from sklearn.model_selection import train_test_split
 
-from loan_data.inference import make_predictions
-from loan_data.preprocess import preprocess
+from inference import make_predictions
+from preprocess import preprocess
 
 
 def build_model(train_data: pd.DataFrame) -> int:
@@ -15,7 +15,7 @@ def build_model(train_data: pd.DataFrame) -> int:
 
     x_train, x_test = train_test_split(train_data,
                                        train_size=.5,
-                                       stratify=train_data[['Property_Area']])
+                                       stratify=train_data[['Loan_Status']])
 
     y_train = x_train[['Loan_Status']]
     y_test = x_test[['Loan_Status']]

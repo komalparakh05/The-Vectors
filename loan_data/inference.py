@@ -1,6 +1,6 @@
 import pandas as pd
 from joblib import load
-from loan_data.preprocess import preprocess
+from preprocess import preprocess
 
 
 def make_predictions(trained_data: pd.DataFrame) -> pd.DataFrame:
